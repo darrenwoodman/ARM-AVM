@@ -1,0 +1,8 @@
+$context = Get-AzSubscription -SubscriptionId {}
+Set-AzContext $context
+$templateFile = "ARM-AVD-Template.json"
+Set-AzDefault -ResourceGroupName []
+$today=Get-Date -Format "MM-dd-yyyy"
+$deploymentName="Storageonlytemplate-"+"$today"
+$storageName {Testy123}
+New-AzResourceGroupDeployment -Name $deploymentName -TemplateFile $templateFile
