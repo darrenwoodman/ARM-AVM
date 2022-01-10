@@ -4,5 +4,4 @@ $templateFile = "ARM-AVD-Template.json"
 Set-AzDefault -ResourceGroupName []
 $today=Get-Date -Format "MM-dd-yyyy"
 $deploymentName="Storageonlytemplate-"+"$today"
-$storageName {Testy123}
-New-AzResourceGroupDeployment -Name $deploymentName -TemplateFile $templateFile
+New-AzResourceGroupDeployment -Name $deploymentName -TemplateFile $templateFile -storageName tspprotesty456 -storageAccountType -ResourceGroupName AVD-RG
