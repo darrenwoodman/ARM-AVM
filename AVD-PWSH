@@ -1,20 +1,35 @@
-# Set subscription context
-$context = Get-AzSubscription -SubscriptionId {}
-Set-AzContext $context
+# Set subscription context - If needed
+#$context = Get-AzSubscription -SubscriptionId {}
+#Set-AzContext $context
+
 # Create resource group in context
-$resourcegroupName = "AVD-RG"
+$resourcegroupName = "AVD-RG-Test"
 $resourcegroupLocation = "ukwest"
 New-AzResourceGroup $resourcegroupName $resourcegroupLocation
+
 # Set default resource group
 Set-AzDefault -ResourceGroupName
+
 # Create Storage group for AVD
-# Allowed option for storageaccountType are 
+# Set Storage Name, must be between 3 and 24 chars.
+$storageName = "ARMAVDTestTSP100"
+
+# Set storage account Type - Allowed option for storageaccountType are 
 #        "Standard_LRS",
 #        "Standard_GRS",
 #        "Standard_ZRS",
 #        "Premium_LRS"
+$storageaccountType = "Standard_LRS"
+
+# Set Cost Center for Tags
+$CostCenter = "ARMTESTTSPRO"
+
+#Set ARM Template file location
 $templateFile = "./ARM-AVD-StorageGroup-Template.json"
+
+#Set Deployments name
 $today=Get-Date -Format "MM-dd-yyyy"
 $deploymentName="Storageonlytemplate-"+"$today"
-New-AzResourceGroupDeployment -Name $deploymentName -TemplateFile $templateFile -storageName tspprotesty456 -storageAccountType Standard_LRS 
-    -ResourceGroupName AVD-RG
+
+#Issue deployment commane
+New-AzResourceGroupDeployment -Name $deploymentName -TemplateFile $templateFile -CostCenter $CostCenter -storageName $storageName -storageAccountType $storageaccountType -ResourceGroupName $resourcegroupLocation
