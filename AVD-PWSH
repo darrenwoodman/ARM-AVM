@@ -4,7 +4,7 @@
 
 # Create resource group in context
 $resourcegroupName = "AVD-RG-Test"
-$resourcegroupLocation = "ukwest"
+$resourcegroupLocation = "uk west"
 New-AzResourceGroup $resourcegroupName $resourcegroupLocation
 
 # Set default resource group
@@ -31,5 +31,5 @@ $templateFile = "./ARM-AVD-StorageGroup-Template.json"
 $today=Get-Date -Format "MM-dd-yyyy"
 $deploymentName="Storageonlytemplate-"+"$today"
 
-#Issue deployment commane
+#Issue deployment command
 New-AzResourceGroupDeployment -Name $deploymentName -TemplateFile $templateFile -CostCenter $CostCenter -storageName $storageName -storageAccountType $storageaccountType -ResourceGroupName $resourcegroupLocation
