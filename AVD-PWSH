@@ -2,10 +2,13 @@
 #$context = Get-AzSubscription -SubscriptionId {}
 #Set-AzContext $context
 
+# Set Cost Center for Tags
+$CostCenter = "ARMTESTTSPRO"
+
 # Create resource group in context
 $resourcegroupName = "AVD-RG-Test"
 $resourcegroupLocation = "uk west"
-New-AzResourceGroup $resourcegroupName $resourcegroupLocation
+New-AzResourceGroup $resourcegroupName $resourcegroupLocation -Tag @{CostCenter=$CostCenter}
 
 # Set default resource group
 Set-AzDefault -ResourceGroupName
@@ -20,9 +23,6 @@ $storageName = "ARMAVDTestTSP100"
 #        "Standard_ZRS",
 #        "Premium_LRS"
 $storageaccountType = "Standard_LRS"
-
-# Set Cost Center for Tags
-$CostCenter = "ARMTESTTSPRO"
 
 #Set ARM Template file location
 $templateFile = "./ARM-AVD-StorageGroup-Template.json"
